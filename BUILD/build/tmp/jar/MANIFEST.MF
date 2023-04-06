@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Fw-Version: 1.0.3
+Main-Class: org.example.Main
+

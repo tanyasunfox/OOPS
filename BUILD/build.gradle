@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+
+publishing {
+    publications {
+        myLib(MavenPublication) {
+            groupId = 'org.example'
+            artifactId = 'library'
+            version = '1.2'
+            from components.java
+        }
+        //repositories {
+            //maven {
+                //credentials {
+                   // username = "$usr"
+                  //  password = "$pwd"
+               // }
+
+                //url = ""
+           // }
+        //}
+    }
+
+}
+
+jar {
+    manifest{
+        attributes ("Fw-Version" : '1.0.3', 'Main-Class' : 'org.example.Main' )
+
+    }
+    archiveFileName='build.jar'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    runtimeOnly files('build/libs/build.jar')
+    implementation files('build/libs/myapp1.jar')
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
